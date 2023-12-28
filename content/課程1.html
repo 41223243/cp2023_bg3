@@ -2,7 +2,7 @@
         <head>
         <title>cmsite</title>
         <meta charset="utf-8">
-<meta property="head" content="H1">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -142,9 +142,214 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w8 << <a href='w8.html'>Previous</a> <a href='w11-12.html'>Next</a> >> w11-12<br /><h1>w10</h1>
-<p><img alt="" height="250" src="./../images/roc_flag_in_gd.png" width="376"/></p>
-<br />w8 << <a href='w8.html'>Previous</a> <a href='w11-12.html'>Next</a> >> w11-12</div>
+    <div id="tipue_search_content">c_EX << <a href='c_EX.html'>Previous</a> <a href='練習1.html'>Next</a> >> 練習1<br /><h1>課程1</h1>
+<p>1.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+int main()
+{
+float a = 0.5;
+double b = 1.2;
+int c = 3;
+b = b + a + c;
+ 
+/* 输出 a, b, c 到屏幕 */
+printf("a = %3.1f, b = %3.1f, c = %d\n", a, b, c);
+ 
+return 0;
+}</pre>
+<p>2.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">/* ====================
+   字元範例 1
+   ==================== */
+#include &lt;stdio.h&gt;
+ 
+int main()
+{
+    char x, y;
+ 
+    x = 'a';
+    y = (char)97;
+ 
+    /* 輸出 x, y, x, 最後一個是以 ASCII 值顯示 y */
+    printf("x = %c, y = %c, ASCII of y = %d", x, y, y);
+ 
+    return 0;
+}
+</pre>
+<p>3.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+int main()
+{
+    int a = 64;
+    int b = 0x40; // 以十六进制表示
+    long c = 64L;
+ 
+    // 打印变量的值
+    printf("%d, %d, %ld", a, b, c);
+ 
+    return 0;
+}</pre>
+<div class="line number1 index0 alt2"><code class="cpp preprocessor"></code>4.</div>
+<div class="line number1 index0 alt2">
+<div class="line number1 index0 alt2"><code class="cpp preprocessor">#include &lt;stdio.h&gt;</code></div>
+<div class="line number2 index1 alt1"> </div>
+<div class="line number3 index2 alt2"><code class="cpp color1 bold">int</code> <code class="cpp plain">main()</code></div>
+<div class="line number4 index3 alt1"><code class="cpp plain">{</code></div>
+<div class="line number5 index4 alt2"><code class="cpp spaces">    </code><code class="cpp color1 bold">int</code> <code class="cpp plain">a = 10, b = 5;</code></div>
+<div class="line number6 index5 alt1"> </div>
+<div class="line number7 index6 alt2"><code class="cpp spaces">    </code><code class="cpp comments">// 第一组比较</code></div>
+<div class="line number8 index7 alt1"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a == b is %d\n"</code><code class="cpp plain">, a == b);</code></div>
+<div class="line number9 index8 alt2"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a &gt; b is %d\n"</code><code class="cpp plain">, a &gt; b);</code></div>
+<div class="line number10 index9 alt1"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a &lt; b is %d\n"</code><code class="cpp plain">, a &lt; b);</code></div>
+<div class="line number11 index10 alt2"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a &gt;= b is %d\n"</code><code class="cpp plain">, a &gt;= b);</code></div>
+<div class="line number12 index11 alt1"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a &lt;= b is %d\n"</code><code class="cpp plain">, a &lt;= b);</code></div>
+<div class="line number13 index12 alt2"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a != b is %d\n"</code><code class="cpp plain">, a != b);</code></div>
+<div class="line number14 index13 alt1"> </div>
+<div class="line number15 index14 alt2"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"\n"</code><code class="cpp plain">);</code></div>
+<div class="line number16 index15 alt1"> </div>
+<div class="line number17 index16 alt2"><code class="cpp spaces">    </code><code class="cpp comments">// 修改 b 的值</code></div>
+<div class="line number18 index17 alt1"><code class="cpp spaces">    </code><code class="cpp plain">b = 10;</code></div>
+<div class="line number19 index18 alt2"> </div>
+<div class="line number20 index19 alt1"><code class="cpp spaces">    </code><code class="cpp comments">// 第二组比较</code></div>
+<div class="line number21 index20 alt2"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a == b is %d\n"</code><code class="cpp plain">, a == b);</code></div>
+<div class="line number22 index21 alt1"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a &gt; b is %d\n"</code><code class="cpp plain">, a &gt; b);</code></div>
+<div class="line number23 index22 alt2"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a &lt; b is %d\n"</code><code class="cpp plain">, a &lt; b);</code></div>
+<div class="line number24 index23 alt1"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a &gt;= b is %d\n"</code><code class="cpp plain">, a &gt;= b);</code></div>
+<div class="line number25 index24 alt2"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a &lt;= b is %d\n"</code><code class="cpp plain">, a &lt;= b);</code></div>
+<div class="line number26 index25 alt1"><code class="cpp spaces">    </code><code class="cpp functions bold">printf</code><code class="cpp plain">(</code><code class="cpp string">"a != b is %d\n"</code><code class="cpp plain">, a != b);</code></div>
+<div class="line number27 index26 alt2"> </div>
+<div class="line number28 index27 alt1"><code class="cpp spaces">    </code><code class="cpp keyword bold">return</code> <code class="cpp plain">0;</code></div>
+<div class="line number29 index28 alt2"><code class="cpp plain">}</code></div>
+</div>
+<p>5.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+void main()
+{
+int a;
+ 
+// 第一次输出
+a = 3;
+printf("%d\n", !a); // 逻辑非运算，a为真，所以输出0
+ 
+// 第二次输出
+a = 0;
+printf("%d\n", !a); // 逻辑非运算，a为假，所以输出1
+}</pre>
+<p>6.</p>
+<div>
+<div class="syntaxhighlighter cpp" id="highlighter_967546">
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+void main()
+{
+    char a;
+ 
+    // 使用 %zu 格式说明符输出 size_t 类型
+    printf("The size of int is %zu\n", sizeof(int));
+ 
+    // 使用 %zu 格式说明符输出 size_t 类型
+    printf("The size of char a is %zu\n", sizeof(a));
+}
+</pre>
+</div>
+</div>
+<p>7.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+/* ====================
+计算长方形面积, 需传入长与宽.
+==================== */
+int rect(int x, int y)
+{
+    int result;
+    result = x * y;
+    return result; /* 返回 result */
+}
+ 
+/* ====================
+主函数
+==================== */
+int main()
+{
+    int x = 8, y = 4;
+    int a;
+    a = rect(x, y);
+    printf("8*4 的面积是 %d", a);
+    return 0;
+}</pre>
+<p>8.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+float circle( int r ); /* 宣告 circle 的 prototype */
+void main()
+{
+float answer;
+answer = circle(8);
+printf( " 圓周長度是 %f", answer );
+}
+/* ====================
+ circle 函數, 計算 circle 的圓周長
+==================== */
+float circle( int r )
+{
+float result;
+result = 3.14159 * (double)1001 * r;
+return ( result );
+}</pre>
+<p>9.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+int main()
+{
+    char ch;
+ 
+    printf("输入一个字符：");
+ 
+    // 检查 scanf 的返回值，确保成功读取一个字符
+    if (scanf(" %c", &amp;ch) != 1) {
+        printf("读取字符失败\n");
+        return 1; // 或者采取其他错误处理措施
+    }
+ 
+    if (ch == 'a') {
+        printf("您按下了 'a'\n");
+    }
+ 
+    return 0;
+}</pre>
+<p>10.</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+ 
+void main()
+{
+    int i;
+ 
+    // 提示用户输入一个整数
+    printf("100：");
+ 
+    // 读取用户输入的整数
+    scanf("%d", &amp;i);
+ 
+    // 判断输入的整数，并输出相应的消息
+    if (i &lt; 100)
+    {
+        printf("i &lt; 100\n");
+    }
+    else
+    {
+        if ((i &gt;= 100) &amp;&amp; (i &lt; 200))
+        {
+            printf("i &gt;= 100 且 i &lt; 200\n");
+        }
+        else
+        {
+            printf("i &gt;= 200\n");
+        }
+    }
+}</pre>
+<br />c_EX << <a href='c_EX.html'>Previous</a> <a href='練習1.html'>Next</a> >> 練習1</div>
         
     <!-- footer -->
       <div class="container">
