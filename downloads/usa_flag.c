@@ -17,7 +17,7 @@ gdImageAlphaBlending(img, 0);
 
 draw_usa_flag(img);
 
-FILE *outputFile = fopen("./../images/usa_flag.png", "wb");
+FILE *outputFile = fopen("./../images/1usa_flag.png", "wb");
 if (outputFile == NULL) {
 fprintf(stderr, "Error opening the output file.\n");
 return 1;
