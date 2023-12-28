@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <gd.h>
+
 #include <math.h>
 
 void draw_usa_flag(gdImagePtr img);
