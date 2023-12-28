@@ -1,251 +1,148 @@
-<h1>About</h1>
-<p><a href="https://github.com/mdecycu/cmsite"> https://github.com/mdecycu/cmsite</a></p>
-<h1>組員倉儲列表</h1>
-<p><a href="https://leeshaowei0716.github.io/cp2023/content/index.html">https://leeshaowei0716.github.io/cp2023/content/index.html</a></p>
-<p><a href="https://41223243.github.io/cp2023/content/w5.html">https://41223243.github.io/cp2023/content/w5.html</a></p>
-<p><a href="https://41223251.github.io/cp2023/content/index.html">https://41223251.github.io/cp2023/content/index.html</a></p>
-<p><a href="https://41223230.github.io/cp2023/content/index.html">https://41223230.github.io/cp2023/content/index.html</a></p>
-<p><a href="https://41223217.github.io/cp2023/content/index.html">https://41223217.github.io/cp2023/content/index.html</a></p>
-<p><a href="https://41223248.github.io/cp2023/content/index.html">https://41223248.github.io/cp2023/content/index.html</a></p>
-<p><a href="https://41223242.github.io/cp2023/content/index.html">https://41223242.github.io/cp2023/content/index.html</a></p>
-<p><a href="https://41223216.github.io/cp2023/content/index.html">https://41223216.github.io/cp2023/content/index.html</a></p>
-<p></p>
-<h1>w2~3</h1>
-<p>網路設定的部分</p>
-<p><video controls="controls" height="150" width="300">
-<source src="/images/Network settings.mp4" type="video/mp4"/></video></p>
-<h1>w4~5</h1>
-<p>在replit上執行gunplot。</p>
-<p></p>
-<pre class="brush:csharp;auto-links:false;toolbar:false" contenteditable="false">// 包含標準輸出入程式庫的標頭文件{ pkgs }: 
-// https://blog.csdn.net/weixin_38468077/article/details/101069365
-// http://www.gnuplot.info/demo/
-// https://github.com/sysprog21/rv32emu
-// https://github.com/sysprog21/semu 
-// https://docs.google.com/presentation/d/14N0cWG2SnBSqhc2cLF0_2VerB9FF8JN3
-// https://cs61c.org/fa23/
-// https://greenteapress.com/wp/think-python-2e/
-// https://github.com/ecalvadi/c99-examples
-// https://github.com/gouravthakur39/beginners-C-program-examples
-// https://github.com/ergenekonyigit/Numerical-Analysis-Examples
-// https://www.che.ncku.edu.tw/facultyweb/changct/html/teaching/CPPandMATLAB/Past/pdf%20Files/Chap02-Ling.pdf
-// https://gteceducation.com.sg/Brochures/PROGRAMMING/C%20PROGRAMMING%20FULL.pdf
-// https://jsommers.github.io/cbook/cbook.pdf
-// https://jsommers.github.io/cbook/index.html
-// http://student.itee.uq.edu.au/courses/csse2310/CProgrammingNotes.pdf
-// http://cslibrary.stanford.edu/101/EssentialC.pdf
-// https://publications.gbdirect.co.uk/c_book/
-// https://www.fossil-scm.org/fossil-book/doc/2ndEdition/fossilbook.pdf
-// ***** execute on replit 
-// cd downloads
-// cc gnuplot_ex1.c -o gnuplot_ex1
-// ./gnuplot_ex1
-#include &lt;stdio.h&gt;
-
-// 主函式
-int main() {
-    // Start a Gnuplot process using popen
-    FILE *gnuplotPipe = popen("gnuplot -persistent", "w");
-    if (!gnuplotPipe) {
-        fprintf(stderr, "Failed to start Gnuplot.\n");
-        return 1;
-    }
-
-    // Use Gnuplot plotting commands, specify font and output as PNG
-    fprintf(gnuplotPipe, "set terminal png font 'default,10' size 800,400\n");
-    fprintf(gnuplotPipe, "set output './../images/gnuplot_ex1.png'\n");
-    fprintf(gnuplotPipe, "plot sin(x)");
-    // Close popen
-    pclose(gnuplotPipe);
-
-    return 0;
-}</pre>
-<p>在Shell部分打上</p>
-<p>cd downloads(改變至downloads檔案目錄)</p>
-<p>cc gunplot.c(cc是編譯器命令，用於編輯C語言)</p>
-<p>./a.out</p>
-<p>便會產生圖片</p>
-<p><video controls="controls" height="150" width="300">
-<source src="/images/w4~w5.mp4" type="video/mp4"/></video></p>
-<p>注:影片中有部分解釋打錯pull更改為push</p>
-<p><img alt="" height="250" src="/images/gnuplot_ex1.png" width="500"/></p>
-<h1>w6</h1>
-<h1>w7</h1>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
-#include &lt;math.h&gt;
-  
-void draw_roc_flag(gdImagePtr img);
-void draw_white_sun(gdImagePtr img, int center_x, int center_y, int sun_radius, int white, int red, int blue);
-  
-int main() {
-    // width 3: height 2
-    int width = 1200;
-    int height = (int)(width*2.0 / 3.0);
-  
-    gdImagePtr img = gdImageCreateTrueColor(width, height);
-    gdImageAlphaBlending(img, 0);
-  
-    draw_roc_flag(img);
-  
-    FILE *outputFile = fopen("./roc_flag.png", "wb");
-    if (outputFile == NULL) {
-        fprintf(stderr, "Error opening the output file.\n");
-        return 1;
-    }
-    gdImagePngEx(img, outputFile, 9);
-    fclose(outputFile);
-    gdImageDestroy(img);
-    return 0;
-}
-  
-void draw_roc_flag(gdImagePtr img) {
-    int width = gdImageSX(img);
-    int height = gdImageSY(img);
-    int red, white, blue;
-    int center_x = (int)(width/4);
-    int center_y = (int)(height/4);
-    int sun_radius = (int)(width/8);
-  
-    // Colors for the flag
-    red = gdImageColorAllocate(img, 242, 0, 0); // Red color
-    white = gdImageColorAllocate(img, 255, 255, 255); // White stripes
-    blue = gdImageColorAllocate(img, 0, 41, 204); // Blue
-  
-    // 繪製紅色矩形區域
-    gdImageFilledRectangle(img, 0, 0, width, height, red);
-  
-    // 繪製藍色矩形區域
-    gdImageFilledRectangle(img, 0, 0, (int)(width/2.0), (int)(height/2.0), blue);
-  
-    // 繪製太陽
-    draw_white_sun(img, center_x, center_y, sun_radius, white, red, blue);
-}
-void draw_white_sun(gdImagePtr img, int center_x, int center_y, int sun_radius, int white, int red, int blue) {
-    float angle = 0;
-    int numRays = 12; // 光芒的數量
-  
-    gdPoint points[3]; // 三個頂點的陣列
-  
-    for (int i = 0; i &lt; numRays; i++) {
-        angle = i * (2 * M_PI / numRays);
-        float x1 = center_x + cos(angle) * sun_radius;
-        float y1 = center_y + sin(angle) * sun_radius;
-  
-        // 調整兩個底邊頂點的位置
-      float x2 = center_x + cos(angle + 0.35) * (sun_radius * 0.5);
-      float y2 = center_y + sin(angle + 0.35) * (sun_radius * 0.5);
-      float x3 = center_x + cos(angle - 0.35) * (sun_radius * 0.5);
-      float y3 = center_y + sin(angle - 0.35) * (sun_radius * 0.5);
-  
-        // 設定多邊形的三個頂點
-        points[0].x = (int)x1;
-        points[0].y = (int)y1;
-        points[1].x = (int)x2;
-        points[1].y = (int)y2;
-        points[2].x = (int)x3;
-        points[2].y = (int)y3;
-  
-        gdImageFilledPolygon(img, points, 3, white);
-    }
-  //外圈
-  gdImageFilledEllipse(img, center_x, center_y, sun_radius * 1.2, sun_radius * 1.2, blue);
+<!DOCTYPE html><html>
+        <head>
+        <title>cmsite</title>
+        <meta charset="utf-8">
+<meta property="head" content="H1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/css/magnific-popup.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/css/jquery-ui.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/flaticon/font/flaticon.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/css/aos.css">
+        <link rel="stylesheet" href="./../cmsimde/static/chimper/css/style.css">
+        <link rel="shortcut icon" href="./../cmsimde/static/favicons.png">
+        
+        <style type='text/css'>
+            .site-section {
+            background-color: #FFFF;
+            padding: 40px 40px;
+            }
+            body > div > div.dropdown.open {
+                display: block;
+            }
+        </style>
     
-    // 繪製太陽內部
-    gdImageFilledEllipse(img, center_x, center_y, sun_radius * 1.1, sun_radius * 1.1, white);
-}</pre>
-<p><img alt="" height="267" src="/images/roc_flag.png" width="400"/></p>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
-#include &lt;math.h&gt;
-
-void draw_usa_flag(gdImagePtr img);
-void draw_star(gdImagePtr img, int x, int y, int size, int color, double rotation_angle);
-
-int main() {
-    int width = 800;
-    int height = (int)(width / 1.9);
-
-    gdImagePtr img = gdImageCreateTrueColor(width, height);
-    gdImageAlphaBlending(img, 0);
-
-    draw_usa_flag(img);
-
-    FILE *outputFile = fopen("./../images/usa_flag.png", "wb");
-    if (outputFile == NULL) {
-        fprintf(stderr, "打开输出文件时出错。\n");
-        return 1;
-    }
-
-    gdImagePngEx(img, outputFile, 9);
-    fclose(outputFile);
-    gdImageDestroy(img);
-
-    return 0;
+        <!-- <script src="./../cmsimde/static/jquery.js"></script> -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+        <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="./../cmsimde/static/tipuesearch/css/normalize.min.css">
+        <script src="./../cmsimde/static/tipuesearch/tipuesearch_set.js"></script>
+        <script src="tipuesearch_content.js"></script>
+        <link rel="stylesheet" href="./../cmsimde/static/tipuesearch/css/tipuesearch.css">
+        <script src="./../cmsimde/static/tipuesearch/tipuesearch.js"></script>
+        <!-- for Wink3 客製化關閉 -->
+        <!--
+        <link rel="stylesheet" type="text/css" href="./../cmsimde/static/winkPlayer.css" />
+        <script type="text/javascript" src="./../cmsimde/static/winkPlayer.js"></script>
+        -->
+        <script>
+            /* original tipuesearch
+            $(document).ready(function() {
+                 $('#tipue_search_input').tipuesearch();
+            });
+            */
+            // customed doSearch
+            function doSearch() {
+                $('#tipue_search_input').tipuesearch({
+                    newWindow: true, 
+                    minimumLength: 2,
+                    wholeWords: false, // for search 中文
+                });
+            }
+            $(document).ready(doSearch);
+        </script>
+        
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushBash.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushDiff.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushHaxe.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushLua.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushMojo.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCSharp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushDart.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushRust.js"></script>
+<link type="text/css" rel="stylesheet" href="./../cmsimde/static/syntaxhighlighter/css/shCoreDefault.css"/>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<!-- 暫時不用
+<script src="./../cmsimde/static/fengari-web.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/Cango-13v08-min.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/CangoAxes-4v01-min.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/gearUtils-05.js"></script>
+-->
+<!-- for Brython 暫時不用
+<script src="https://scrum-3.github.io/web/brython/brython.js"></script>
+<script src="https://scrum-3.github.io/web/brython/brython_stdlib.js"></script>
+-->
+<style>
+img.add_border {
+    border: 3px solid blue;
 }
+</style>
 
-void draw_usa_flag(gdImagePtr img) {
-    int width = gdImageSX(img);
-    int height = gdImageSY(img);
-    int red, white, blue;
-    // 国旗颜色
-    red = gdImageColorAllocate(img, 178, 34, 52); // 红色条纹
-    white = gdImageColorAllocate(img, 255, 255, 255); // 白色条纹
-    blue = gdImageColorAllocate(img, 60, 59, 110); // 蓝色矩形
+</head>
+<body>
+<div class='container'><nav>
+        
+    <div class="site-wrap">
 
-    int stripe_height = height / 13;
-    int stripe_width = width;
-    int star_size = (int)(0.0308 * height); // 星星大小
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+    
+            <header class="site-navbar py-4 bg-white" role="banner">
+              <div class="container">
+                <div class="row align-items-center">
+                <h1>cp2023_bg3</h1>
+                <div class="pl-4">
+                    <form>
+                    <input type="text" placeholder="Search" name="q" id="tipue_search_input" pattern=".{2,}" title="At least 2 characters" required>
+                    </form>
+                </div>
+                  <!-- <div class="col-11 col-xl-2">
+                    <h1 class="mb-0 site-logo"><a href="index.html" class="text-black h2 mb-0">cp2023_bg3</a></h1> 
+                  </div>
+                  -->
+                  <div class="col-12 col-md-10 d-none d-xl-block">
+                    <nav class="site-navigation position-relative text-right" role="navigation">
+    <ul class='site-menu js-clone-nav mr-auto d-none d-lg-block'>
+                        <li class="active has-children"><a href="index.html">Home</a>
+                        <ul class="dropdown">
+                            <li><a href="sitemap.html">SMap</a></li>
+                            <li><a href="./../reveal/index.html">reveal</a></li>
+                            <li><a href="./../blog/index.html">blog</a></li>
+                        </ul>
+                      </li>
+                     <li><a href='About.html'>About</a><li><a href='組員倉儲列表.html'>組員倉儲列表</a><li><a href='w2~3.html'>w2~3</a><li><a href='w4~5.html'>w4~5</a><li><a href='w6.html'>w6</a><li><a href='w7.html'>w7</a><li><a href='w8.html'>w8</a><li><a href='w10.html'>w10</a><li><a href='w11-12.html'>w11-12</a><li><a href='w16.html'>w16</a><li><a href='Brython.html'>Brython</a><li><a href='期末總結.html'>期末總結</a></li>
+                      </ul>
+                </nav>
+              </div>
+              <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+              </div>
 
-    for (int y = 0; y &lt; height; y += stripe_height) {
-        if (y / stripe_height % 2 == 0) {
-            gdImageFilledRectangle(img, 0, y, stripe_width, y + stripe_height, red);
-        } else {
-            gdImageFilledRectangle(img, 0, y, stripe_width, y + stripe_height, white);
-        }
-    }
-
-    gdImageFilledRectangle(img, 0, 0, width * 2 / 5, stripe_height * 7, blue);
-
-    int star_spacing_x = (int)(0.129 * height); // 横向星星之间的间距
-    int star_spacing_y = (int)(0.054 * height); // 纵向星星之间的间距
-    int star_start_x = (int)(0.125 * height); // 星星的起始X位置
-    int star_start_y = (int)(0.0485 * height); // 星星的起始Y位置
-
-    for (int row = 0; row &lt; 9; row++) {
-        int starsPerRow = (row % 2 == 0) ? 6 : 5;
-
-        // 计算2、4、6和8排星星的偏移量
-        int offset_x = (row % 2 == 0) ? star_spacing_x / -2 : 0;
-
-        for (int star = 0; star &lt; starsPerRow; star++) {
-            int x = star_start_x + star * star_spacing_x + offset_x;
-
-            // 旋转角度（以弧度为单位）
-            double rotation_angle = M_PI / 5; // 忘記多少度的旋转
-
-            int y = star_start_y + row * star_spacing_y;
-            draw_star(img, x, y, star_size, white, rotation_angle);
-        }
-    }
-}
-
-void draw_star(gdImagePtr img, int x, int y, int size, int color, double rotation_angle) {
-    gdPoint points[10];
-
-    for (int i = 0; i &lt; 10; i++) {
-        double angle = M_PI / 2 + i * 2 * M_PI / 10 + rotation_angle;
-        int radius = (i % 2 == 0) ? size : size / 2;
-        points[i].x = x + radius * cos(angle);
-        points[i].y = y + radius * sin(angle);
-    }
-
-    // 用指定的颜色填充星星
-    gdImageFilledPolygon(img, points, 10, color);
-}</pre>
-<p><img alt="" height="211" src="/images/usa_flag.png" width="400"/></p>
-<p></p>
-<h1>w8</h1>
+            </div>
+          </div>
+          
+        </header>
+    <div id="tipue_search_content">w7 << <a href='w7.html'>Previous</a> <a href='w10.html'>Next</a> >> w10<br /><h1>w8</h1>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
 #include &lt;gd.h&gt;
 #include &lt;stdlib.h&gt;
@@ -290,7 +187,7 @@ int main() {
     return 0;
 }</pre>
 <p></p>
-<p><img caption="false" height="267" src="/images/japanese_flag.png" width="400"/></p>
+<p><img caption="false" height="267" src="./../images/japanese_flag.png" width="400"/></p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
   #include &lt;gd.h&gt;
   #include &lt;math.h&gt;
@@ -365,7 +262,7 @@ int main() {
           draw_star(img, x, y, 19, yellow, M_PI / 5.0);
       }
   }</pre>
-<p><img alt="" height="267" src="/images/proc_flag.png" width="400"/></p>
+<p><img alt="" height="267" src="./../images/proc_flag.png" width="400"/></p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
 #include &lt;gd.h&gt;
 #include &lt;math.h&gt;
@@ -467,7 +364,7 @@ void draw_uk_flag(gdImagePtr img) {
     gdImageFilledRectangle(img, center_x + 1.5 * cross_width, 0, center_x - 1.5 * cross_width, height, red);
     gdImageFilledRectangle(img, 0, center_y + 1.5 * cross_arm_width, width, center_y - 1.5 * cross_arm_width, red);
 }</pre>
-<p><img alt="" height="200" src="/images/uk_flag.png" width="400"/></p>
+<p><img alt="" height="200" src="./../images/uk_flag.png" width="400"/></p>
 <pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;gd.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;math.h&gt;
@@ -808,463 +705,55 @@ int main() {
  
     return 0;
 }</pre>
-<p><img alt="" height="267" src="/images/output.png" width="400"/></p>
-<h1>w10</h1>
-<p><img alt="" height="250" src="/images/roc_flag_in_gd.png" width="376"/></p>
-<h1>w11-12</h1>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
-#include &lt;math.h&gt;
- 
-// Declare the rotation function
-void rotateFilledPolygon(int x_orig, int y_orig, double rotation_ang, gdPoint *points, int num_points) {
-    int i;
-    double angle_rad = rotation_ang * M_PI / 180.0;
- 
-    for (i = 0; i &lt; num_points; i++) {
-        int x = points[i].x - x_orig;
-        int y = points[i].y - y_orig;
- 
-        points[i].x = x_orig + (int)(x * cos(angle_rad) - y * sin(angle_rad));
-        points[i].y = y_orig + (int)(x * sin(angle_rad) + y * cos(angle_rad));
-    }
-}
- 
-int main() {
-    // Image dimensions
-    int width = 800;
-    int height = 600;
- 
-    // Create a true-color image
-    gdImagePtr img = gdImageCreateTrueColor(width, height);
-    gdImageAlphaBlending(img, 0);
- 
-    // Open the output file
-    FILE *outputFile = fopen("hellogd1.png", "wb");
-    if (outputFile == NULL) {
-        fprintf(stderr, "Error opening the output file.\n");
-        return 1;
-    }
- 
-    // Define color indices
-    int red = gdImageColorAllocate(img, 255, 0, 0);
-    int blue = gdImageColorAllocate(img, 0, 0, 255);
-    int black = gdImageColorAllocate(img, 0, 0, 0);
-    int white = gdImageColorAllocate(img, 255, 255, 255);
- 
-    // Draw filled rectangles, ellipse, line, and polygons
-    gdImageFilledRectangle(img, 0, 0, width, height, white);
-    gdImageFilledRectangle(img, 0, 0, (int)width / 4, (int)height / 4, blue);
- 
-    gdImageFilledEllipse(img, (int)width * 3 / 4, (int)height / 4, (int)width / 4, (int)width / 4, red);
-    gdImageEllipse(img, (int)width * 3 / 4, (int)height * 3 / 4, (int)width / 4, (int)width / 4, red);
-    gdImageLine(img, (int)width / 2, (int)height / 2, (int)width / 2, (int)height / 2 + 100, blue);
- 
-    gdPoint points[4] = {
-        { (int)width / 4, (int)height * 3 / 4 },
-        { (int)width / 4 + 100, (int)height * 3 / 4 },
-        { (int)width / 4 + 100, (int)height * 3 / 4 + 100 },
-        { (int)width / 4, (int)height * 3 / 4 + 100 }
-    };
- 
-    // Call the rotation function for the first polygon
-    rotateFilledPolygon((int)width / 4 + 50, (int)height * 3 / 4 + 50, 45.0, points, 4);
-    gdImagePolygon(img, points, 4, black);
- 
-    gdPoint points2[4] = {
-        { (int)width / 3, (int)height / 2 },
-        { (int)width / 3 + 100, (int)height / 2 },
-        { (int)width / 3 + 100, (int)height / 2 + 100 },
-        { (int)width / 3 - 50, (int)height / 2 + 100 }
-    };
- 
-    // Call the rotation function for the second polygon
-    rotateFilledPolygon((int)width / 3 + 50, (int)height / 2 + 50, 30.0, points2, 4);
-    gdImageFilledPolygon(img, points2, 4, red);
- 
-    // Save the image to the output file
-    gdImagePngEx(img, outputFile, 9);
-    fclose(outputFile);
- 
-    // Free the memory used by the image
-    gdImageDestroy(img);
- 
-    return 0;
-}</pre>
-<img alt="" height="300" src="/images/hellogd1.png" width="400"/>
-<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
-#include &lt;gd.h&gt;
-#include &lt;math.h&gt;
-
-// Declare the rotation function
-void rotateFilledPolygon(int x_orig, int y_orig, double rotation_ang, gdPoint *points, int num_points) {
-    int i;
-    double angle_rad = rotation_ang * M_PI / 180.0;
-
-    for (i = 0; i &lt; num_points; i++) {
-        int x = points[i].x - x_orig;
-        int y = points[i].y - y_orig;
-
-        points[i].x = x_orig + (int)(x * cos(angle_rad) - y * sin(angle_rad));
-        points[i].y = y_orig + (int)(x * sin(angle_rad) + y * cos(angle_rad));
-    }
-}
-
-int main() {
-    int width = 800;
-    int height = 600;
-
-    gdImagePtr img = gdImageCreateTrueColor(width, height);
-    gdImageAlphaBlending(img, 0);
-
-    FILE *outputFile = fopen("hellogd2.png", "wb");
-    if (outputFile == NULL) {
-        fprintf(stderr, "Error opening the output file.\n");
-        return 1;
-    }
-
-    int red = gdImageColorAllocate(img, 255, 0, 0);
-    int blue = gdImageColorAllocate(img, 0, 0, 255);
-    int black = gdImageColorAllocate(img, 0, 0, 0);
-    int white = gdImageColorAllocate(img, 255, 255, 255);
-
-    gdImageFilledRectangle(img, 0, 0, width, height, white);
-    gdImageFilledRectangle(img, 0, 0, (int)width / 4, (int)height / 4, blue);
-
-    gdImageFilledEllipse(img, (int)width * 3 / 4, (int)height / 4, (int)width / 4, (int)width / 4, red);
-    gdImageEllipse(img, (int)width * 3 / 4, (int)height * 3 / 4, (int)width / 4, (int)width / 4, red);
-    gdImageLine(img, (int)width / 2, (int)height / 2, (int)width / 2, (int)height / 2 + 100, blue);
-
-    gdPoint points[4];
-    points[0].x = (int)width / 4;
-    points[0].y = (int)height * 3 / 4;
-    points[1].x = points[0].x + 100;
-    points[1].y = points[0].y;
-    points[2].x = points[1].x;
-    points[2].y = points[1].y + 100;
-    points[3].x = points[2].x - 100;
-    points[3].y = points[2].y;
-
-    // Call the rotation function multiple times
-    for (int i = 0; i &lt; 4; i++) {
-        rotateFilledPolygon((int)width / 4 + 50, (int)height * 3 / 4 + 50, 30.0, points, 4);
-        gdImagePolygon(img, points, 4, black);
-    }
-
-    gdPoint points2[4];
-    points2[0].x = (int)width / 3;
-    points2[0].y = (int)height / 2;
-    points2[1].x = points2[0].x + 100;
-    points2[1].y = points2[0].y;
-    points2[2].x = points2[1].x;
-    points2[2].y = points2[1].y + 100;
-    points2[3].x = points2[2].x - 150;
-    points2[3].y = points2[2].y;
-
-    // Call the rotation function multiple times
-    for (int i = 0; i &lt; 12; i++) {
-        //rotateFilledPolygon((int)width / 3 + 50, (int)height / 2 + 50, 30.0, points2, 4);
-        rotateFilledPolygon(500, 200, 30.0, points2, 4);
-        gdImageFilledPolygon(img, points2, 4, red);
-    }
-
-    gdImagePngEx(img, outputFile, 9);
-    fclose(outputFile);
-    gdImageDestroy(img);
-
-    return 0;
-}</pre>
-<img alt="" height="300" src="/images/hellogd2.png" width="400"/>
-<p></p>
-<h1>w16</h1>
-<p></p>
-<h1>Brython</h1>
-<p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
-<h4>Examples:</h4>
-<p style="padding-left: 30px;"><a href="https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d">https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d</a></p>
-<p style="padding-left: 30px;"><a href="https://www.geeksforgeeks.org/python-programming-examples/">https://www.geeksforgeeks.org/python-programming-examples/</a></p>
-<p style="padding-left: 30px;"><a href="https://www.programiz.com/python-programming/examples">https://www.programiz.com/python-programming/examples</a></p>
-<p style="padding-left: 30px;"><a href="https://www.freecodecamp.org/news/python-code-examples-sample-script-coding-tutorial-for-beginners/">https://www.freecodecamp.org/news/python-code-examples-sample-script-coding-tutorial-for-beginners/</a></p>
-<h4>Python Tutorial:</h4>
-<p style="padding-left: 30px;"><a href="https://docs.python.org/3/tutorial/">https://docs.python.org/3/tutorial/</a></p>
-<p style="padding-left: 30px;"><a href="https://docs.python.org/3/tutorial/introduction.html">An informal introduction to Python</a></p>
-<h4>Indentation (Python 採 4 個 Spaces 縮排, 以界定執行範圍)</h4>
-<h4>Variables (<a href="https://github.com/python/cpython/blob/3.11/Lib/keyword.py">Python Keywords</a>)</h4>
-<h4>Comments (# 單行註解, 三個單引號或三個雙引號標註多行註解)</h4>
-<h4><a href="https://docs.python.org/3/tutorial/introduction.html#numbers">Numbers</a> (整數 int(), 浮點數 float())</h4>
-<h4><a href="https://docs.python.org/3/tutorial/introduction.html#strings">Strings</a> (字串)</h4>
-<h4>print (Python 內建函式, <a href="https://docs.python.org/3/library/functions.html#print">print()</a> 函式)</h4>
-<p><a href="https://docs.python.org/3/tutorial/controlflow.html">Python control flow tools</a></p>
-<h4 style="padding-left: 30px;"><a href="https://docs.python.org/3/tutorial/controlflow.html#for-statements">for</a></h4>
-<h4 style="padding-left: 30px;"><a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements">if</a></h4>
-<h4 style="padding-left: 30px;"><a href="https://docs.python.org/3/tutorial/controlflow.html#the-range-function">range</a></h4>
-<h4>open</h4>
-<h4>read</h4>
-<h4><a href="https://docs.python.org/3/tutorial/introduction.html#lists">lists</a></h4>
-<h4><a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">tuples</a></h4>
-<h4><a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionaries</a></h4>
-<h4><a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">functions</a></h4>
-<h4><a href="https://docs.python.org/3/tutorial/errors.html#exceptions">try ... except</a></h4>
-<h4><a href="https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">break</a></h4>
-<h4><a href="https://docs.python.org/3/tutorial/controlflow.html#pass-statements">pass</a></h4>
-<h4><a href="https://docs.python.org/3/tutorial/classes.html?highlight=classes">classes</a></h4>
-<p>這個頁面 demo 如何在同一頁面下納入多個線上 Ace 編輯器與執行按鈕 (<a href="/downloads/practice_html.txt">practice_html.txt</a> 動態頁面超文件).</p>
-<p><a href="/downloads/practice_html.txt">practice_html.txt</a> 動態頁面超文件應該可以在啟動 Brython 時, 設定將 .py 檔案放入 downloads/py 目錄中引用.</p>
-<p>亦即將所有對應的 html 也使用 Brython 產生, 然後寫為 <a href="https://docs.python.org/3/tutorial/classes.html">class</a> 後, 在範例導入時透過 <a href="https://docs.python.org/3/tutorial/classes.html#instance-objects">instance</a> 引用.</p>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- 啟動 Brython --&gt;
-&lt;script&gt;
-window.onload=function(){
-brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
-}
-&lt;/script&gt;</pre>
-<p>從 1 累加到 100:</p>
-<p><button id="add1to100">1 add to 100</button></p>
-<p>將 iterable 與 iterator <a href="https://home.gamer.com.tw/creationDetail.php?sn=4337438">相關說明</a>, 利用 Brython 與 Ace Editor 整理在這個頁面.</p>
-<!-- 導入 brython 程式庫 -->
-<p>
-<script src="/static/brython.js"></script>
-<script src="/static/brython_stdlib.js"></script>
-</p>
-<!-- 啟動 Brython -->
-<p>
-<script>
-window.onload=function(){
-brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
-}
-</script>
-</p>
-<p><!-- 導入 FileSaver 與 filereader --></p>
-<p>
-<script src="/static/ace/FileSaver.min.js" type="text/javascript"></script>
-<script src="/static/ace/filereader.js" type="text/javascript"></script>
-</p>
-<p><!-- 導入 ace --></p>
-<p>
-<script src="/static/ace/ace.js" type="text/javascript"></script>
-<script src="/static/ace/ext-language_tools.js" type="text/javascript"></script>
-<script src="/static/ace/mode-python3.js" type="text/javascript"></script>
-<script src="/static/ace/snippets/python.js" type="text/javascript"></script>
-</p>
-<p><!-- 導入 gearUtils-0.9.js Cango 齒輪繪圖程式庫 -->
-<script src="/static/Cango-24v03-min.js"></script>
-<script src="/static/gearUtils-09.js"></script>
-<script src="/static/SVGpathUtils-6v03-min.js"></script>
-<script src="/static/sylvester.js"></script>
-<script src="/static/PrairieDraw.js"></script>
-</p>
-<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["kw_py_src1"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
-<p>
-<script type="text/javascript">
-function doSave(storage_id, filename){
-    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
-    filename = document.getElementById(filename).value
-    saveAs(blob, filename+".py");
-}
-</script>
-</p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import ace
-# 清除畫布
-def clear_bd1(ev):
-    bd = doc["brython_div1"]
-    bd.clear()
-Ace1 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
-# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
-def run1():
-    # 利用 get 取下 src 變數值
-    try:
-        url = doc.query["src"]
-    except:
-        url = "https://gist.githubusercontent.com/mdecourse/0229a8a017091476a79700b8a190f185/raw/c3a6deaf717f8f2739a4b1392a5ab10936e9693a/from_1_add_to_10_1.py"
-    prog = open(url).read()
-
-    # 將程式載入編輯區
-    Ace1.editor.setValue(prog)
-    Ace1.editor.scrollToRow(0)
-    Ace1.editor.gotoLine(0)
-    # 直接執行程式
-    #ns = {'__name__':'__main__'}
-    #exec(prog, ns)
-    # 按下 run 按鈕
-    Ace1.run()
-
-# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
-doc['kw_run1'].bind('click', Ace1.run)
-doc['kw_show_console1'].bind('click', Ace1.show_console)
-doc['kw_clear_console1'].bind('click', Ace1.clear_console)
-doc['clear_bd1'].bind('click', clear_bd1)
-# 呼叫函式執行
-run1()
-</script>
-</p>
-<p><!-- add 1 to 100 開始 -->
-<script type="text/python3">
-from browser import document as doc
-import ace
-
-# 清除畫布
-def clear_bd1(ev):
-    bd = doc["brython_div1"]
-    bd.clear()
-
-# 利用 ace 中的 Editor 建立 Ace2 物件, 其中的輸入變數分別對應到頁面中的編輯區物件
-Ace2 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
-
-add1to100_url = "https://gist.githubusercontent.com/mdecourse/0229a8a017091476a79700b8a190f185/raw/c48e37714f055c3a0027cbfef59e442a6ef659b9/from_1_add_to_100_1.py"
-
-# 從 gist 取得程式碼
-add_src = open(add1to100_url).read()
-def add(ev):
-    Ace2.editor.setValue(add_src)
-    Ace2.editor.scrollToRow(0)
-    Ace2.editor.gotoLine(0)
-    Ace2.run()
-
-# id 為 "add1to100" 的按鈕點按時, 執行 add 方法
-doc["add1to100"].bind('click', add)
-</script>
-</p>
-<p><!-- add 1 to 100 結束--></p>
-<!-- editor1 開始 -->
-<p><!-- 用來顯示程式碼的 editor 區域 --></p>
-<div id="kw_editor1" style="width: 600px; height: 300px;"></div>
-<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
-<p><!-- 存擋表單開始 --></p>
-<form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src1', 'kw_filename1');" type="submit" value="Save"/></form>
-<p><!-- 存擋表單結束 --></p>
-<p></p>
-<p><!-- 執行與清除按鈕開始 --></p>
-<p><button id="kw_run1">Run</button> <button id="kw_show_console1">Output</button> <button id="kw_clear_console1">清除輸出區</button><button id="clear_bd1">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
-<p><!-- 執行與清除按鈕結束 --></p>
-<p></p>
-<p><!-- 程式執行 ouput 區 --></p>
-<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console1"></textarea></div>
-<p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
-<div id="brython_div1"></div>
-<!-- editor1 結束 --><hr/><!-- ########################################## -->
-<p>從 1 累加到 100 part2:</p>
-<p><button id="add1to100part2">1 add to 100</button><button id="cango_three_gears">cango_three_gears</button><button id="bsnake">BSnake</button><button id="aitetris">AI Tetris</button><button id="threejsblock">Rotating Block</button></p>
-<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["kw_py_src2"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import ace
-# 清除畫布
-def clear_bd2(ev):
-    bd = doc["brython_div2"]
-    bd.clear()
-Ace3 = ace.Editor(editor_id="kw_editor2", console_id="kw_console2", container_id="kw__container2", storage_id="kw_py_src2" )
-# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
-def run2():
-    # 利用 get 取下 src 變數值
-    try:
-        url = doc.query["src2"]
-    except:
-        url = "https://gist.githubusercontent.com/mdecourse/0229a8a017091476a79700b8a190f185/raw/c3a6deaf717f8f2739a4b1392a5ab10936e9693a/from_1_add_to_10_1.py"
-    prog = open(url).read()
-
-    # 將程式載入編輯區
-    Ace3.editor.setValue(prog)
-    Ace3.editor.scrollToRow(0)
-    Ace3.editor.gotoLine(0)
-    # 直接執行程式
-    #ns = {'__name__':'__main__'}
-    #exec(prog, ns)
-    # 按下 run 按鈕
-    Ace3.run()
-
-# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
-doc['kw_run2'].bind('click', Ace3.run)
-doc['kw_show_console2'].bind('click', Ace3.show_console)
-doc['kw_clear_console2'].bind('click', Ace3.clear_console)
-doc['clear_bd2'].bind('click', clear_bd2)
-# 呼叫函式執行
-run2()
-</script>
-</p>
-<p><!-- add 1 to 100 part2 開始 -->
-<script type="text/python3">
-from browser import document as doc
-import ace
-
-# 清除畫布
-def clear_bd2(ev):
-    bd = doc["brython_div2"]
-    bd.clear()
-
-# 利用 ace 中的 Editor 建立 Ace2 物件, 其中的輸入變數分別對應到頁面中的編輯區物件
-Ace4 = ace.Editor(editor_id="kw_editor2", console_id="kw_console2", container_id="kw__container2", storage_id="kw_py_src2" )
-
-# 透過 Ace4 以類別建立一個通用的 button2, 可以在多個案例中將 gist 程導入編輯區
-
-class button2:
-    def __init__(self, url):
-        self.url = url
-
-    # 記得加入 event 輸入變數
-    def do(self,ev):
-        Ace4.editor.setValue(open(self.url).read())
-        Ace4.editor.scrollToRow(0)
-        Ace4.editor.gotoLine(0)
-        Ace4.run()
-
-add1to100_url = "https://gist.githubusercontent.com/mdecourse/0229a8a017091476a79700b8a190f185/raw/c48e37714f055c3a0027cbfef59e442a6ef659b9/from_1_add_to_100_1.py"
-
-# 從 gist 取得程式碼
-add_src = open(add1to100_url).read()
-def add2(ev):
-    Ace4.editor.setValue(add_src)
-    Ace4.editor.scrollToRow(0)
-    Ace4.editor.gotoLine(0)
-    Ace4.run()
-
-# id 為 "add1to100part2" 的按鈕點按時, 執行 add 方法
-doc["add1to100part2"].bind('click', add2)
-# 以下為運用 button2 class 的通用 gist 程式導入區
-################################## cango_three_gears start
-cango_three_gears_url = "https://gist.githubusercontent.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d/raw/f7a85d737d6723d5e34c526d5daee990ed92c32b/cango_three_gears_brython_div2.py"
-cango_three_gears = button2(cango_three_gears_url)
-doc["cango_three_gears"].bind("click", cango_three_gears.do)
-################################## cango_three_gears end
-################################## bsnake start
-bsnake_url = "https://gist.githubusercontent.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d/raw/f7a85d737d6723d5e34c526d5daee990ed92c32b/kmol_snakey.py"
-bsnake = button2(bsnake_url)
-doc["bsnake"].bind("click", bsnake.do)
-################################## bsnake end
-################################## aitetris start
-aitetris_url = "https://gist.githubusercontent.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d/raw/f7a85d737d6723d5e34c526d5daee990ed92c32b/pygame_to_brython_tetris_ai.py"
-aitetris = button2(aitetris_url)
-doc["aitetris"].bind("click", aitetris.do)
-################################## aitetris end
-################################## threejsblock start
-threejsblock_url = "https://gist.githubusercontent.com/mdecycu/2c6323eff49b496d1bafd210f3ec9707/raw/df37802f9e8a386b6424f7945af622b1cd0a9ca5/threejs_rotating_block.py"
-threejsblock = button2(threejsblock_url)
-doc["threejsblock"].bind("click", threejsblock.do)
-################################## threejsblock end
-</script>
-</p>
-<p><!-- add 1 to 100 part2 結束--></p>
-<!-- editor2 開始 -->
-<p><!-- 用來顯示程式碼的 editor 區域 --></p>
-<div id="kw_editor2" style="width: 600px; height: 300px;"></div>
-<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
-<p><!-- 存擋表單開始 --></p>
-<form><label>Filename: <input id="kw_filename2" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src2', 'kw_filename2');" type="submit" value="Save"/></form>
-<p><!-- 存擋表單結束 --></p>
-<p></p>
-<p><!-- 執行與清除按鈕開始 --></p>
-<p><button id="kw_run2">Run</button> <button id="kw_show_console2">Output</button> <button id="kw_clear_console2">清除輸出區</button><button id="clear_bd2">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
-<p><!-- 執行與清除按鈕結束 --></p>
-<p></p>
-<p><!-- 程式執行 ouput 區 --></p>
-<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console2"></textarea></div>
-<p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
-<div id="brython_div2"></div>
-<!-- editor2 結束 --><hr/>
-<p>
-<script src="https://unpkg.com/three@0.144.0/build/three.js" type="text/javascript"></script>
-</p>
-<h1>期末總結</h1>
-<p>請各學員根據<a href="https://mde.tw/cpnote/content/%E4%B8%8A%E8%AA%B2%E5%85%A7%E5%AE%B9.html">課程內容</a>中的倉儲與網站評分項目, 自行評分.</p>
+<p><img alt="" height="267" src="./../images/output.png" width="400"/></p>
+<br />w7 << <a href='w7.html'>Previous</a> <a href='w10.html'>Next</a> >> w10</div>
+        
+    <!-- footer -->
+      <div class="container">
+        <div class="row pt-3 mx-auto">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+      </div>
+    <!-- for footer -->
+    
+        </div> <!-- for site wrap -->
+            <!-- <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+            <script src="../cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery-ui.js"></script>
+            <script src="../cmsimde/static/chimper/js/popper.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/aos.js"></script>
+            <!--
+            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+                    <script>
+                    var typed = new Typed('.typed-words', {
+                    strings: ["Web Apps"," WordPress"," Mobile Apps"],
+                    typeSpeed: 80,
+                    backSpeed: 80,
+                    backDelay: 4000,
+                    startDelay: 1000,
+                    loop: true,
+                    showCursor: true
+                    });
+                    </script>
+            -->
+            <script src="../cmsimde/static/chimper/js/main.js"></script>
+        
+<!-- 啟用 LaTeX equations 編輯 -->
+  <!-- <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\(', '\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+    </body></html>
+        
